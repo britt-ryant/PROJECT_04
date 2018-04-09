@@ -10,12 +10,4 @@ mainRouter.route('/')
 
 
 
-
-
-
-
-
-
-
-
 module.exports = mainRouter
