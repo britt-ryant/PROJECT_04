@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import services from './services/apiServices';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import Login from './components/Login';
 
 export default class App extends React.Component {
   constructor(props){
@@ -13,21 +14,33 @@ export default class App extends React.Component {
   componentDidMount(){
     services.connect()
     .then(results => {
-      console.log(results);
+      // console.log(results.data);
+      this.setState({
+        apiDataLoaded: true,
+        apiData: results.data.data
+      })
     })
     .catch(err => {
       console.log('youre an idiot', err);
     })
-    // console.log("Finally a console log!");
   }
-  render() {
+
+  renderData() {
     return (
       <View style={styles.container}>
-        <Text></Text>
-        <Text>Changes you make will automatically reload.</Text>
+        <Text>Changes you make will automatically reload. No shit</Text>
         <Text>Shake your phone to open the developer menu.</Text>
+        <Login />
       </View>
     );
+  }
+  render(){
+    console.log('loaded', this.state)
+    return(
+      <View style={styles.container}>
+          {this.state.apiDataLoaded ? this.renderData() : ''}
+      </View>
+    )
   }
 }
 
