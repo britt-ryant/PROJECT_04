@@ -1,7 +1,6 @@
-# PROJECT_04 TINDER
+# PROJECT_04 Connection
 
 
-# Connection
 
 # MVP:
 
