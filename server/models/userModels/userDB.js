@@ -21,5 +21,36 @@ module.exports = {
   getUser(data){
     console.log('in get user', data)
     return db.one(`SELECT * FROM user_table WHERE username=$[username] AND password=$[password];`, data)
+  },
+  getDetails(id){
+    return db.one(`SELECT * FROM user_information WHERE user_id=$1`, id)
+  },
+  updateInfo(data){
+    console.log(data);
+    return db.one(`UPDATE user_information
+      SET
+      gender=$[gender],
+      seeking=$[seeking],
+      description=$[description]
+      WHERE
+      user_id=$[user_id]
+      RETURNING *;`,
+    data)
+  },
+  insertInfo(data){
+    return db.one(`INSERT INTO user_information (user_id, gender, seeking, description) VALUES (
+      $[user_id],
+      $[gender],
+      $[seeking],
+      $[description]
+    )RETURNING *;`, data)
+  },
+  remove(id){
+    console.log(id);
+    return db.none(`DELETE FROM user_information WHERE user_id=$1`, id)
+  },
+  delete(id){
+    console.log(id);
+    return db.none('DELETE FROM user_table WHERE id=$1', id)
   }
 }

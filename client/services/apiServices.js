@@ -32,4 +32,41 @@ services.logIn = (data) => {
   })
 }
 
+services.getProfileInfo = (id) => {
+  // console.log("in api data");
+  return axios.get(`http://localhost:3001/user/profiles/${id}`)
+}
+
+services.updateProfileInfo = (data) => {
+  // console.log("in the api services here is my data", data);
+  return axios.request({
+              url: `http://localhost:3001/user/profiles/${data.userId}`,
+              method: "PUT",
+              data: {
+                gender: data.gender,
+                seeking: data.seeking,
+                description: data.description,
+                user_id: data.userId
+              }
+  })
+}
+services.createProfileInfo = (data) => {
+  return axios.request({
+              url: `http://localhost:3001/user/profiles/${data.userId}`,
+              method: "POST",
+              data: {
+                gender: data.gender,
+                seeking: data.seeking,
+                description: data.description,
+                user_id: data.userId
+              }
+  })
+}
+services.nuke = (id) => {
+  return axios.request({
+              url: `http://localhost:3001/user/profiles/${id}`,
+              method: "DELETE"
+  })
+}
+
 export default services

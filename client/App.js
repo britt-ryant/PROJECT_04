@@ -2,7 +2,11 @@ import React from 'react';
 import services from './services/apiServices';
 import { Button, StyleSheet, Text, View } from 'react-native';
 // import Login from './components/userComponents/Login';
-import SignUp from './components/userComponents/SignUp'
+// import SignUp from './components/userComponents/SignUp'
+import UserProfile from './components/userComponents/UserProfile';
+// import EditProfile from './components/userComponents/EditProfile';
+// import CreateProfile from './components/userComponents/CreateProfile';
+import DeleteProfile from './components/userComponents/DeleteProfile';
 
 
 export default class App extends React.Component {
@@ -33,7 +37,11 @@ export default class App extends React.Component {
         <Text>Changes you make will automatically reload. No shit</Text>
         <Text>Shake your phone to open the developer menu.</Text>
         {/* <Login /> */}
-        <SignUp />
+        {/* <SignUp /> */}
+        <UserProfile />
+        {/* <EditProfile /> */}
+        {/* <CreateProfile /> */}
+        <DeleteProfile/>
       </View>
     );
   }

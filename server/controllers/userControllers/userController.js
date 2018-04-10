@@ -30,7 +30,7 @@ module.exports = {
     })
   },
   createNewUser(req, res, next){
-    console.log('I am still the same req.body', req.body);
+    // console.log('I am still the same req.body', req.body);
     userDB.createUser(req.body)
     .then(result => {
       res.json({
@@ -43,21 +43,77 @@ module.exports = {
     })
   },
   getUserData(req, res, next){
-    console.log('In the controller');
+    // console.log('In the controller');
     userDB.getUser(req.body)
     .then(result => {
-      console.log('I am the result in the controller', result);
+      // console.log('I am the result in the controller', result);
       res.json({
         message: "got the user",
         data: result
       })
     })
     .catch(err => {
-      console.log('Youre a fucking idiot', err);
+      // console.log('Youre a fucking idiot', err);
       res.json({
         message: "The username and password do not match what we have on record!",
         data: 0
       })
+    })
+  },
+  getMe(req, res, next){
+    userDB.getDetails(req.params.id)
+    .then(result => {
+      res.json({
+        message: "got user",
+        data: result
+      })
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  },
+  update(req, res, next){
+    userDB.updateInfo(req.body)
+    .then(result => {
+      res.json({
+        message: "update was successful",
+        data: result
+      })
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  },
+  createNewInfo(req, res, next){
+    userDB.insertInfo(req.body)
+    .then(result => {
+      res.json({
+        message: "created new user information table entry",
+        data: result
+      })
+    })
+    .catch(err => {
+      console.log("I am the error in the create user information controller method", err);
+    })
+  },
+  removeProfileFromUserInformation(req, res, next){
+    userDB.remove(req.params.id)
+    .then(() => {
+      next()
+    })
+    .catch(err => {
+      next(err)
+    })
+  },
+  removeProfileFromUserTable(req, res, next){
+    userDB.delete(req.params.id)
+    .then(result => {
+      res.json({
+        message: "profile was deleted"
+      })
+    })
+    .catch(err => {
+      console.log("error occured in the delete", err);
     })
   }
 }
