@@ -7,3 +7,9 @@ INSERT INTO test_table (name, expression) VALUES (
   'Chris',
   'this is more test data'
 );
+
+
+INSERT INTO user_table (username, password) VALUES (
+  'Brittryant',
+  '1234'
+);

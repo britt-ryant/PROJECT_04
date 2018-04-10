@@ -4,10 +4,10 @@ mainDB = require('../../models/mainModels/mainDB');
 
 module.exports = {
   index(req, res, next){
-    console.log("I was called here");
+    // console.log("I was called here");
     mainDB.getAll()
     .then(response => {
-      console.log(response);
+      // console.log(response);
       res.json({
         message: "ok",
         data: response

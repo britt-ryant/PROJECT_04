@@ -16,6 +16,7 @@ const app = express();
 
 
 const mainRouter = require('./routes/mainRoutes/mainRouter');
+const userRouter = require('./routes/userRoutes/userRouter');
 
 app.use(cors());
 app.use(methodOverride(`_method`));
@@ -27,7 +28,7 @@ app.use(express.static(`public`));
 app.set(`views`, path.join(__dirname, `views`));
 app.set(`view engine`, `ejs`);
 
-
+app.use('/user', userRouter)
 app.use('/api', mainRouter)
 
 
