@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert, Button, StyleSheet, Text, View } from 'react-native';
+import { TextInput, Alert, Button, StyleSheet, Text, View } from 'react-native';
 import services from '../services/apiServices';
 
 export default class Login extends React.Component  {
@@ -7,13 +7,17 @@ export default class Login extends React.Component  {
     super(props);
     this.state = {
       apiDataLoaded: false,
-      apiData: null
+      apiData: null,
+      email: "",
+      password: ""
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
-  componentDidMount(){
-    services.connect()
+  handleSubmit(){
+    console.log('I AM THE FUCKING STATE!!!!!!!!!!!!!!!!!_________>>>>>>>',this.state);
+    services.connect(this.state)
     .then(results => {
-      console.log('I am the results !!!!!!', results.data.data);
+      console.log('did a thing', results)
       this.setState({
         apiDataLoaded: true,
         apiData: results.data.data
@@ -22,22 +26,29 @@ export default class Login extends React.Component  {
     .catch(err => {
       console.log(`You suck on Login`, err);
     })
-  }
-  fakeDidMount(){
-    Alert.alert("hello down there!!!!")
-  }
-  renderData(){
-    const data = this.state.apiData.map((obj, key) => <Text key={key}>{obj.name}</Text>)
-    return(
-      <View style={styles.tiny}>
-        {data}
-      </View>
-    )
-  }
+}
   render(){
     return(
       <View style={styles.tiny}>
-          {this.state.apiDataLoaded ? this.renderData() : (<Text>No Data Yet</Text>)}
+        {console.log(this.state)}
+        <TextInput
+          style={{marginLeft:110, width: 150, marginTop:50,fontSize:30}}
+          placeholder='email'
+          onChangeText={(email) => this.setState({email})}
+          value={this.state.email}
+        />
+        <TextInput
+          style={{marginLeft:115, width: 150, marginTop:5,fontSize:30,marginBottom: 15}}
+          placeholder='Password'
+          onChangeText={(password) => this.setState({password})}
+          secureTextEntry={true}
+          value={this.state.password}
+        />
+        <Button
+          onPress={this.handleSubmit}
+          title="SUBMIT"
+          color="#841584"
+        />
       </View>
     )
   }

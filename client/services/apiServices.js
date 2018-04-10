@@ -2,11 +2,15 @@ import axios from 'axios';
 
 const services = {};
 
-services.connect = () => {
-  // console.log("we're here");
+services.connect = (data) => {
+  console.log("we're here", data);
   return axios.request({
-    url: "http://localhost:3001/api",
-    method: "GET"
+    url: "http://localhost:3001/api/users",
+    method: "POST",
+    data: {
+      email: data.email,
+      password: data.password
+    }
   })
 }
 
