@@ -1,7 +1,7 @@
 import React from 'react';
 import services from './services/apiServices';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import Login from './components/Login';
+// import Login from './components/Login';
 
 export default class App extends React.Component {
   constructor(props){
@@ -11,26 +11,26 @@ export default class App extends React.Component {
       apiData: null
     }
   }
-  componentDidMount(){
-    services.connect()
-    .then(results => {
-      // console.log(results.data);
-      this.setState({
-        apiDataLoaded: true,
-        apiData: results.data.data
-      })
-    })
-    .catch(err => {
-      console.log('youre an idiot', err);
-    })
-  }
+  // componentDidMount(){
+  //   services.connect()
+  //   .then(results => {
+  //     // console.log(results.data);
+  //     this.setState({
+  //       apiDataLoaded: true,
+  //       apiData: results.data.data
+  //     })
+  //   })
+  //   .catch(err => {
+  //     console.log('youre an idiot', err);
+  //   })
+  // }
 
   renderData() {
     return (
       <View style={styles.container}>
         <Text>Changes you make will automatically reload. No shit</Text>
         <Text>Shake your phone to open the developer menu.</Text>
-        <Login />
+        {/* <Login /> */}
       </View>
     );
   }
@@ -38,7 +38,7 @@ export default class App extends React.Component {
     console.log('loaded', this.state)
     return(
       <View style={styles.container}>
-          {this.state.apiDataLoaded ? this.renderData() : ''}
+          {this.renderData()}
       </View>
     )
   }
