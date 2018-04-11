@@ -2,6 +2,7 @@ import React from 'react'
 import { TextInput, Alert, Button, StyleSheet, Text, View } from 'react-native';
 import services from '../../services/apiServices';
 import LikeButton from './LikeButton';
+import UnlikeButton from './UnlikeButton';
 
 
 export default class ShowAllProfiles extends React.Component  {
@@ -19,21 +20,12 @@ export default class ShowAllProfiles extends React.Component  {
     }
   }
   componentDidMount(){
-    console.log("this.state.searchResults Monitor", this.state.searchResults);
-      services.getAllProfiles(this.state.seeking)
-      .then(result => {
-        console.log(result);
-        this.setState({
-          searchResults: result.data.data
-        }, () => this.processSearchResults())
-      })
-      .catch(err => {
-        console.log('I am returning an error!', err);
-      })
+    // console.log("this.state.searchResults Monitor", this.state.searchResults);
+    this.querySearch()
     }
   processSearchResults(){
     let searchResults = this.state.searchResults
-    let randomIndex = Math.floor(Math.random()*searchResults.length + 1)
+    let randomIndex = Math.floor(Math.random()*(searchResults.length))
     this.setState({
       currentProfile: this.state.searchResults[randomIndex],
       apiDataLoaded: true,
@@ -41,9 +33,29 @@ export default class ShowAllProfiles extends React.Component  {
     })
   }
   handleLike(){
-    console.log("My state was lifted in react native!");
+    if(this.state.searchResults.length === 1){
+      this.querySearch()
+    } else {
+      let newState = this.state.searchResults.splice(this.state.indexToRemove, 1)
+      this.processSearchResults()
+    }
   }
+  querySearch(){
+    services.getAllProfiles(this.state.seeking)
+    .then(result => {
+      this.setState({
+        searchResults: result.data.data
+      }, () => this.processSearchResults())
+    })
+    .catch(err => {
+      console.log('I am returning an error!', err);
+    })
+  }
+
+
   renderData(){
+    let currentUser = this.state.currentUser;
+    let currentProfile = this.state.currentProfile.user_id;
     return (
       <View style={styles.tiny}>
         <Text>My name is {this.state.currentProfile.username}</Text>
@@ -52,8 +64,11 @@ export default class ShowAllProfiles extends React.Component  {
         <Text>About me: {this.state.currentProfile.description}</Text>
         <LikeButton
           handleLike={() => this.handleLike()}
-          browsingUser={this.state.currentProfile.user_id}
-          currentUser={this.state.currentUser}
+          browsingUser={currentProfile}
+          currentUser={currentUser}
+        />
+        <UnlikeButton
+          handleLike={() => this.handleLike()}
         />
       </View>
     )
@@ -61,7 +76,7 @@ export default class ShowAllProfiles extends React.Component  {
   render(){
     return(
         <View style={styles.tiny}>
-          {this.state.apiDataLoaded ? this.renderData() : ''}
+          {this.state.apiDataLoaded ? this.renderData() : console.log('loading..')}
         </View>
     )
   }
