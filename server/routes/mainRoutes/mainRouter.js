@@ -7,6 +7,10 @@ const mainController = require('../../controllers/mainControllers/mainController
 mainRouter.route('/')
           // .get(mainController.index)
           .post(mainController.browseAll)
+mainRouter.route('/like')
+          .post(mainController.submitLike)
+mainRouter.route('/check')
+          .post(mainController.checkForMatch)
 
 // mainRouter.route('/:prox')
 //           .post(mainController.browseAll)

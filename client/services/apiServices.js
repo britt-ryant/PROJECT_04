@@ -81,4 +81,27 @@ services.getAllProfiles = (data) => {
   })
 }
 
+services.addToLikeTable = (data) => {
+  console.log("I am in apiServices, adding to the Like table with: ", data);
+  return axios.request({
+    url: `http://localhost:3001/api/like`,
+    method: "POST",
+    data: {
+      like_sent: data.like_sent,
+      like_received: data.like_received
+    }
+  })
+}
+services.checkForMatch = (data) => {
+  console.log("Inside apiServices", data);
+  return axios.request({
+    url: 'http://localhost:3001/api/check',
+    method: "POST",
+    data: {
+      like_sent: data.like_received,
+      like_received: data.like_sent
+    }
+  })
+}
+
 export default services

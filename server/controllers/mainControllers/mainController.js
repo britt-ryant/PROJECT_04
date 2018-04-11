@@ -30,6 +30,33 @@ module.exports = {
     .catch(err => {
       console.log('I am the error in the get all function in the mainController', err);
     })
+  },
+  submitLike(req, res, next){
+    mainDB.like(req.body)
+    .then(result => {
+      res.json({
+        message: "Like was added to the like table",
+        data: result
+      })
+    })
+    .catch(err => {
+      console.log("oops, something went wrong here!", err);
+    })
+  },
+  checkForMatch(req, res, next){
+    mainDB.check(req.body)
+    .then(result => {
+      res.json({
+        message: "Its a Match!!",
+        data: 1
+      })
+    })
+    .catch(err => {
+      res.json({
+        message: "no matches found",
+        data: 0
+      })
+    })
   }
 
   }

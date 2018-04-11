@@ -7,7 +7,6 @@ module.exports = {
   //   return db.many(`SELECT * FROM test_table;`)
   // },
   getAll(data){
-    console.log("Im in the model", data);
     return db.many(`SELECT * FROM user_information
       JOIN
       user_table
@@ -15,5 +14,15 @@ module.exports = {
       user_table.id = user_information.user_id
       WHERE
       gender=$[gender]`, data)
+  },
+  like(data){
+    return db.one(`INSERT INTO like_table (like_sent, like_received) VALUES (
+      $[like_sent],
+      $[like_received]
+    ) RETURNING *;`, data)
+  },
+  check(data){
+    // console.log("Im in the model", data);
+    return db.one(`SELECT FROM like_table WHERE like_sent=$[like_sent] AND like_received=$[like_received];`, data)
   }
 }
