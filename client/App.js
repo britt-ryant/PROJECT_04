@@ -3,33 +3,34 @@ import services from './services/apiServices';
 import { Button, StyleSheet, Text, View } from 'react-native';
 // import Login from './components/userComponents/Login';
 // import SignUp from './components/userComponents/SignUp'
-import UserProfile from './components/userComponents/UserProfile';
+// import UserProfile from './components/userComponents/UserProfile';
 // import EditProfile from './components/userComponents/EditProfile';
 // import CreateProfile from './components/userComponents/CreateProfile';
-import DeleteProfile from './components/userComponents/DeleteProfile';
+// import DeleteProfile from './components/userComponents/DeleteProfile';
+import ShowAllProfiles from './components/browseComponents/ShowAllProfiles';
 
 
 export default class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      apiDataLoaded: false,
+      apiDataLoaded: true,
       apiData: null
     }
   }
-  componentDidMount(){
-    services.connect()
-    .then(results => {
-      // console.log(results.data);
-      this.setState({
-        apiDataLoaded: true,
-        apiData: results.data.data
-      })
-    })
-    .catch(err => {
-      console.log('youre an idiot', err);
-    })
-  }
+  // componentDidMount(){
+  //   services.connect()
+  //   .then(results => {
+  //     // console.log(results.data);
+  //     this.setState({
+  //       apiDataLoaded: true,
+  //       apiData: results.data.data
+  //     })
+  //   })
+  //   .catch(err => {
+  //     console.log('youre an idiot', err);
+  //   })
+  // }
 
   renderData() {
     return (
@@ -38,10 +39,11 @@ export default class App extends React.Component {
         <Text>Shake your phone to open the developer menu.</Text>
         {/* <Login /> */}
         {/* <SignUp /> */}
-        <UserProfile />
+        {/* <UserProfile /> */}
         {/* <EditProfile /> */}
         {/* <CreateProfile /> */}
-        <DeleteProfile/>
+        {/* <DeleteProfile/> */}
+        <ShowAllProfiles />
       </View>
     );
   }

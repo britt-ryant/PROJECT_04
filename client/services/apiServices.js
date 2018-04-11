@@ -69,4 +69,16 @@ services.nuke = (id) => {
   })
 }
 
+services.getAllProfiles = (data) => {
+  console.log("I am the data for show all", data);
+  return axios.request({
+    url: `http://localhost:3001/api`,
+    method: "POST",
+    data: {
+      gender: data,
+      // proximity: data.proximity
+    }
+  })
+}
+
 export default services

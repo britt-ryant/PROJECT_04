@@ -5,7 +5,11 @@ const mainController = require('../../controllers/mainControllers/mainController
 
 
 mainRouter.route('/')
-          .get(mainController.index)
+          // .get(mainController.index)
+          .post(mainController.browseAll)
+
+// mainRouter.route('/:prox')
+//           .post(mainController.browseAll)
 
 
 
