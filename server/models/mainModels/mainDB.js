@@ -24,5 +24,12 @@ module.exports = {
   check(data){
     // console.log("Im in the model", data);
     return db.one(`SELECT FROM like_table WHERE like_sent=$[like_sent] AND like_received=$[like_received];`, data)
+  },
+  newMatch(data){
+    console.log("Going into the match table in the db as a new match ", data);
+    return db.one(`INSERT INTO match_table (user_one, user_two) VALUES (
+      $[user_one],
+      $[user_two]
+    ) RETURNING *;`, data)
   }
 }

@@ -57,6 +57,21 @@ module.exports = {
         data: 0
       })
     })
+  },
+  createMatch(req, res, next){
+    console.log("I am the req.body in the controller for creating a new match", req.body);
+    mainDB.newMatch(req.body)
+    .then(result => {
+      res.locals = result
+      console.log("I am the result", result);
+      next()
+    }, )
+    .catch(err => {
+      console.log('there was an error when you tried to insert a new match:', err);
+    })
+  },
+  createNotification(req, res, next){
+    console.log("Going to create a notification for: ", res.locals);
   }
 
   }

@@ -70,7 +70,7 @@ services.nuke = (id) => {
 }
 
 services.getAllProfiles = (data) => {
-  console.log("I am the data for show all", data);
+  // console.log("I am the data for show all", data);
   return axios.request({
     url: `http://localhost:3001/api`,
     method: "POST",
@@ -82,7 +82,7 @@ services.getAllProfiles = (data) => {
 }
 
 services.addToLikeTable = (data) => {
-  console.log("I am in apiServices, adding to the Like table with: ", data);
+  // console.log("I am in apiServices, adding to the Like table with: ", data);
   return axios.request({
     url: `http://localhost:3001/api/like`,
     method: "POST",
@@ -93,7 +93,7 @@ services.addToLikeTable = (data) => {
   })
 }
 services.checkForMatch = (data) => {
-  console.log("Inside apiServices", data);
+  // console.log("Inside apiServices", data);
   return axios.request({
     url: 'http://localhost:3001/api/check',
     method: "POST",
@@ -101,6 +101,17 @@ services.checkForMatch = (data) => {
       like_sent: data.like_received,
       like_received: data.like_sent
     }
+  })
+}
+services.createMatch = (data) => {
+  console.log("I should be Tiffany", data);
+  return axios.request({
+      url: 'http://localhost:3001/api/match',
+      method: "POST",
+      data: {
+        user_one: data.currentUser,
+        user_two: data.currentProfile.user_id
+      }
   })
 }
 

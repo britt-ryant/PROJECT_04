@@ -40,6 +40,7 @@ export default class ShowAllProfiles extends React.Component  {
       this.processSearchResults()
     }
   }
+
   querySearch(){
     services.getAllProfiles(this.state.seeking)
     .then(result => {
@@ -49,6 +50,22 @@ export default class ShowAllProfiles extends React.Component  {
     })
     .catch(err => {
       console.log('I am returning an error!', err);
+    })
+  }
+
+  handleMatch(){
+    console.log("I lifted the state to handle match in the ShowAllProfiles and handling like");
+    services.createMatch(this.state)
+    .then(result => {
+      console.log("I am the result of inserting into the match table!", result);
+      this.setState({
+        match: true,
+        //fireRedirect: true
+        //need to fire off a function that will alert of a match and ask the user to vist the message coponent or if they want to go back to browsing, for now I will continue to follow the browsing route
+      }, () => this.handleLike())
+    })
+    .catch(err => {
+      console.log("I am the error for the match handler", err);
     })
   }
 
@@ -64,6 +81,7 @@ export default class ShowAllProfiles extends React.Component  {
         <Text>About me: {this.state.currentProfile.description}</Text>
         <LikeButton
           handleLike={() => this.handleLike()}
+          handleMatch={() => this.handleMatch()}
           browsingUser={currentProfile}
           currentUser={currentUser}
         />

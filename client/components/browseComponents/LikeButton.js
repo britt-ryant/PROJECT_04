@@ -6,7 +6,6 @@ import services from '../../services/apiServices';
 export default class LikeButton extends React.Component {
   constructor(props){
     super(props);
-    //change the currentBrowsedUserId
     this.state = {
       browsingUser: this.props.browsingUser,
       currentUser: this.props.currentUser,
@@ -15,14 +14,12 @@ export default class LikeButton extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleSubmit(e){
-    // console.log(`The current loggedin user is ${this.state.currentUser} and the current browsing user is ${this.state.browsingUser}`);
     let likeData = {
       like_sent: this.props.currentUser,
       like_received: this.props.browsingUser
     }
     services.addToLikeTable(likeData)
     .then(result => {
-      // console.log(`back to services, successful!`, result);
       this.checkForLikeBack(likeData)
     })
     .catch(err => {
@@ -30,29 +27,22 @@ export default class LikeButton extends React.Component {
     })
   }
   checkForLikeBack(data){
-    // console.log('here', data);
     services.checkForMatch(data)
     .then(result => {
-      // console.log(`I am the result for check for match!`, result);
+      console.log(`I am the result for check for match!`, result.data.data);
       if(result.data.data === 1){
-        this.setState({
-          match: true
-        }, () => this.props.handleLike())
+        //shoot this to the parent to handle the match
+        this.props.handleMatch()
       } else {
-        this.setState({
-          match: false
-        }, () => this.props.handleLike())
+        console.log("not a match, but can still call any function that I want!");
+        this.props.handleLike()
       }
     })
     .catch(err => {
       console.log(`I am the error handle for checkForMatch`, err);
     })
-    // this.props.handleLike()
   }
-  callMatch(){
-    // Alert.alert("Its a match!")
-    console.log("Its a match");
-  }
+
   render(){
     return(
       <View>
@@ -60,8 +50,8 @@ export default class LikeButton extends React.Component {
           title="LIKE"
           onPress={this.handleSubmit}
         />
-        {console.log("Is this a match??", this.state.match)}
-        {this.state.match ? this.callMatch() : ''}
+        {/* {console.log("Is this a match??", this.state.match)} */}
+        {/* {this.state.match ? this.callMatch() : ''} */}
       </View>
     )
   }
