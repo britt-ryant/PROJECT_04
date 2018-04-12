@@ -38,15 +38,15 @@ services.getProfileInfo = (id) => {
 }
 
 services.updateProfileInfo = (data) => {
-  // console.log("in the api services here is my data", data);
+  console.log("in the api services here is my data", data);
   return axios.request({
-              url: `http://localhost:3001/user/profiles/${data.userId}`,
+              url: `http://localhost:3001/user/profiles/${data.currentUserId}`,
               method: "PUT",
               data: {
                 gender: data.gender,
                 seeking: data.seeking,
                 description: data.description,
-                user_id: data.userId
+                user_id: data.currentUserId
               }
   })
 }
@@ -104,7 +104,6 @@ services.checkForMatch = (data) => {
   })
 }
 services.createMatch = (data) => {
-  console.log("I should be Tiffany", data);
   return axios.request({
       url: 'http://localhost:3001/api/match',
       method: "POST",

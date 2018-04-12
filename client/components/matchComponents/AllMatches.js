@@ -17,14 +17,14 @@ export default class AllMatches extends React.Component {
     this.navigate = this.navigate.bind(this)
   }
   componentDidMount(){
-    console.log("I am getting all matches!", this.props);
+    // console.log("I am getting all matches!", this.props);
     services.getAllMatches(this.state.currentUserId)
     .then(results => {
-      console.log(`I got all of the matches for ${this.state.currentUserId}`, results);
+      // console.log(`I got all of the matches for ${this.state.currentUserId}`, results);
       this.setState({
         apiData: results.data.data,
         apiDataLoaded: true
-      }, () => console.log(`I am the new state`, this.state.apiData))
+      })
     })
     .catch(err => {
       console.log(`Something went wrong trying to get ${this.state.currentUserId}'s matches`, err);

@@ -8,8 +8,7 @@ export default class EditProfile extends React.Component  {
     super(props);
     this.state = {
       //change this state property of userId to be this.props.userId
-      userId: this.props.currentUser,
-      // username: "brittryant",
+      currentUserId: this.props.currentUser,
       apiDataLoaded: false,
       userData: null,
       message: "",
@@ -21,9 +20,7 @@ export default class EditProfile extends React.Component  {
   }
 
   componentDidMount(){
-    console.log(`I am the componentDidMount`, this.props);
-    //get all of the user information
-    services.getProfileInfo(this.state.userId)
+    services.getProfileInfo(this.state.currentUserId)
     .then(result => {
       console.log('I found the userdata!', result);
       this.setState({
@@ -40,12 +37,11 @@ export default class EditProfile extends React.Component  {
   }
 
   handleSubmit(e){
-    console.log('I am the new state of the apppppppp!!!!', this.state);
+    const {navigate} = this.props.navigation
+    this.props.screenProps = this.state.currentUserId
     services.updateProfileInfo(this.state)
     .then(result => {
-      this.setState({
-        fireRedirect: true
-      })
+      navigate("BrowseScreen", this.state)
     })
     .catch(err => {
       console.log("This is the error in the update function", err);
@@ -55,10 +51,6 @@ export default class EditProfile extends React.Component  {
   renderData(){
     return(
       <View style={styles.tiny}>
-        {/* <Text>My name is {this.state.username}</Text>
-        <Text>I am a {this.state.userData.gender}</Text>
-        <Text>Looking for a {this.state.userData.seeking}</Text>
-        <Text>About me: {this.state.userData.description}</Text> */}
         <Text>{this.state.message}</Text>
         <TextInput
           style={{marginLeft:10, width: 150, marginTop:50,fontSize:30}}

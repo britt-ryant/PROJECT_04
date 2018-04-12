@@ -13,11 +13,7 @@ export default class ShowAllProfiles extends React.Component  {
       apiDataLoaded: false,
       currentProfile: null,
       currentUser: this.props.currentUserId,
-      //this trait will need to be set based on props that are passed in from the user
       seeking: this.props.seeking
-      //should also consider passing in the gender of me to use to filter the "searching for" trait of the user
-      // gender: "M"
-      //this can all be an object of the current user that passes in all of the information of the user, this will allow for additional data to be passes through the user search query in the SQL request
     }
     this.handleNavigation = this.handleNavigation.bind(this)
     this.handleEditPress = this.handleEditPress.bind(this)
@@ -88,14 +84,24 @@ export default class ShowAllProfiles extends React.Component  {
     })
   }
   messageOption(){
-    console.log(`I am a match!`);
-    //Alert that can direct to either continue or keep swiping or I can use the previously modified state to address this situation but I think this function chain is best...
+    this.alertFunction()
     this.handleLike()
   }
   handleNavigation(){
-    console.log(`I was clicked to handle navigation!`);
     const {navigate} = this.props.navigation
     navigate("MatchesScreen", this.state)
+  }
+  alertFunction(){
+    const {navigate} = this.props.navigation
+    Alert.alert(
+      'You got a match!',
+      '',
+      [
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'Go to matches', onPress: ()=> this.handleNavigation()},
+      ],
+      { cancelable: false }
+    )
   }
 
 
