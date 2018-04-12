@@ -26,10 +26,31 @@ module.exports = {
     return db.one(`SELECT FROM like_table WHERE like_sent=$[like_sent] AND like_received=$[like_received];`, data)
   },
   newMatch(data){
-    console.log("Going into the match table in the db as a new match ", data);
+    // console.log("Going into the match table in the db as a new match ", data);
     return db.one(`INSERT INTO match_table (user_one, user_two) VALUES (
       $[user_one],
       $[user_two]
     ) RETURNING *;`, data)
+  },
+  newMessage(data){
+    // console.log("Going to insert into the db as a new initiator message", data);
+    return db.one(`INSERT INTO message_table (sent_user_id, received_user_id, message, initiator) VALUES (
+      $[sent_user_id],
+      $[received_user_id],
+      $[message],
+      $[initiator]
+    ) RETURNING *;`, data)
+  },
+  getMatches(data){
+    console.log(`In the model, getting all of the matches for the user ${data}`);
+    return db.many(`SELECT * FROM match_table
+    JOIN user_information
+    ON user_information.user_id=match_table.user_one
+    OR
+    user_information.user_id=match_table.user_two
+    WHERE
+    match_table.user_one=$1
+    OR
+    match_table.user_two=$1;`, data)
   }
 }

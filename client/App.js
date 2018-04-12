@@ -7,7 +7,8 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 // import EditProfile from './components/userComponents/EditProfile';
 // import CreateProfile from './components/userComponents/CreateProfile';
 // import DeleteProfile from './components/userComponents/DeleteProfile';
-import ShowAllProfiles from './components/browseComponents/ShowAllProfiles';
+// import ShowAllProfiles from './components/browseComponents/ShowAllProfiles';
+import AllMatches from './components/matchComponents/AllMatches';
 
 
 
@@ -42,7 +43,8 @@ export default class App extends React.Component {
         {/* <EditProfile /> */}
         {/* <CreateProfile /> */}
         {/* <DeleteProfile/> */}
-        <ShowAllProfiles />
+        {/* <ShowAllProfiles /> */}
+        <AllMatches />
       </View>
     );
   }

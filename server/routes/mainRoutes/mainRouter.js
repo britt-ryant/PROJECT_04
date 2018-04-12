@@ -12,6 +12,8 @@ mainRouter.route('/check')
           .post(mainController.checkForMatch)
 mainRouter.route('/match')
           .post(mainController.createMatch, mainController.createNotification)
+mainRouter.route('/match/:id')
+          .get(mainController.getAllMatches)
 
 
 // mainRouter.route('/:prox')

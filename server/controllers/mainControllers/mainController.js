@@ -59,11 +59,11 @@ module.exports = {
     })
   },
   createMatch(req, res, next){
-    console.log("I am the req.body in the controller for creating a new match", req.body);
+    // console.log("I am the req.body in the controller for creating a new match", req.body);
     mainDB.newMatch(req.body)
     .then(result => {
-      res.locals = result
-      console.log("I am the result", result);
+      res.locals= result
+      console.log("I am the result", res.locals);
       next()
     }, )
     .catch(err => {
@@ -71,7 +71,36 @@ module.exports = {
     })
   },
   createNotification(req, res, next){
-    console.log("Going to create a notification for: ", res.locals);
+    // console.log("Going to create a notification for: ", res.locals);
+    let messageData = {
+      sent_user_id: res.locals.user_one,
+      received_user_id: res.locals.user_two,
+      message: "It's a match! Now its time to start a conversation!",
+      initiator: 1
+    }
+    mainDB.newMessage(messageData)
+    .then(result => {
+      res.json({
+        message: "ok",
+        data: result
+      })
+    })
+    .catch(err => {
+      console.log(`Something went wrong with messages`, err);
+    })
+  },
+  getAllMatches(req, res, next){
+    console.log(`in the mainController, getting all matches`, req.params.id);
+    mainDB.getMatches(req.params.id)
+    .then(results => {
+      // console.log(`Got all the matches`, results)
+      let newResults = results.filter(person => person.user_id !== parseInt(req.params.id))
+      console.log(`This should be the new results`, newResults);
+
+    })
+    .catch(err => {
+      console.log(`I am the error for getAllMatches in the controller`, err);
+    })
   }
 
   }

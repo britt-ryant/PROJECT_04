@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS user_table;
 DROP TABLE IF EXISTS user_information;
 DROP TABLE IF EXISTS like_table;
 DROP TABLE IF EXISTS match_table;
+DROP TABLE IF EXISTS message_table;
 
 CREATE TABLE test_table (
   id SERIAL PRIMARY KEY,
@@ -35,6 +36,13 @@ CREATE TABLE like_table (
 );
 
 CREATE TABLE match_table (
-  user_one VARCHAR(255),
-  user_two VARCHAR(255)
+  user_one INTEGER,
+  user_two INTEGER
+);
+
+CREATE TABLE message_table (
+  sent_user_id INTEGER,
+  received_user_id INTEGER,
+  message VARCHAR(500),
+  initiator INTEGER
 );

@@ -11,9 +11,9 @@ export default class ShowAllProfiles extends React.Component  {
     this.state = {
       apiDataLoaded: false,
       currentProfile: null,
-      currentUser: 1,
+      currentUser: 3,
       //this trait will need to be set based on props that are passed in from the user
-      seeking: "F"
+      seeking: "M"
       //should also consider passing in the gender of me to use to filter the "searching for" trait of the user
       // gender: "M"
       //this can all be an object of the current user that passes in all of the information of the user, this will allow for additional data to be passes through the user search query in the SQL request
@@ -54,19 +54,20 @@ export default class ShowAllProfiles extends React.Component  {
   }
 
   handleMatch(){
-    console.log("I lifted the state to handle match in the ShowAllProfiles and handling like");
     services.createMatch(this.state)
     .then(result => {
       console.log("I am the result of inserting into the match table!", result);
       this.setState({
         match: true,
-        //fireRedirect: true
-        //need to fire off a function that will alert of a match and ask the user to vist the message coponent or if they want to go back to browsing, for now I will continue to follow the browsing route
-      }, () => this.handleLike())
+      }, () => this.messageOption())
     })
     .catch(err => {
       console.log("I am the error for the match handler", err);
     })
+  }
+  messageOption(){
+    //Alert that can direct to either continue or keep swiping or I can use the previously modified state to address this situation but I think this function chain is best...
+    this.handleLike()
   }
 
 
