@@ -13,9 +13,15 @@ export default class SignUp extends React.Component  {
       message: "",
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handlePress = this.handlePress.bind(this)
   }
 
+handlePress(){
+  const {navigate} = this.props.navigation
+  navigate("LoginScreen")
+}
   handleSubmit(e){
+    const {navigate} = this.props.navigation
     console.log(this.state);
     services.newUser(this.state)
     .then(result => {
@@ -26,14 +32,13 @@ export default class SignUp extends React.Component  {
           message: result.data.message
         })
       } else {
-        console.log("I just created a new user!!!!!", result);
         this.setState({
           fireRedirect: true,
           message: "",
           newUserId: result.data.data.id,
           newUsername: result.data.data.username,
           newUserPassword: result.data.password
-        })
+        }, () => navigate("CreateProfileScreen", this.state))
       }
     })
     .catch( err => {
@@ -44,7 +49,6 @@ export default class SignUp extends React.Component  {
     return(
         <View style={styles.tiny}>
             <Text tyle={{marginLeft:10, width: 150, marginTop:70,fontSize:30}}>Sign Up</Text>
-          {console.log("rendering the state", this.state)}
             <Text>{this.state.message}</Text>
             <TextInput
               style={{marginLeft:10, width: 150, marginTop:50,fontSize:30}}
@@ -64,6 +68,7 @@ export default class SignUp extends React.Component  {
               title="SUBMIT"
               color="#841584"
             />
+          <Button title='Login Here' color="#841584" onPress={this.handlePress}/>
           </View>
     )
   }

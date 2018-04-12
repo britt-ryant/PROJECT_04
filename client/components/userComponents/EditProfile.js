@@ -8,8 +8,8 @@ export default class EditProfile extends React.Component  {
     super(props);
     this.state = {
       //change this state property of userId to be this.props.userId
-      userId: 1,
-      username: "brittryant",
+      userId: this.props.currentUser,
+      // username: "brittryant",
       apiDataLoaded: false,
       userData: null,
       message: "",
@@ -21,6 +21,7 @@ export default class EditProfile extends React.Component  {
   }
 
   componentDidMount(){
+    console.log(`I am the componentDidMount`, this.props);
     //get all of the user information
     services.getProfileInfo(this.state.userId)
     .then(result => {

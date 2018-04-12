@@ -3,6 +3,7 @@ import { TextInput, Alert, Button, StyleSheet, Text, View } from 'react-native';
 import services from '../../services/apiServices';
 import LikeButton from './LikeButton';
 import UnlikeButton from './UnlikeButton';
+import StackNavigator from 'react-navigation'
 
 
 export default class ShowAllProfiles extends React.Component  {
@@ -11,16 +12,35 @@ export default class ShowAllProfiles extends React.Component  {
     this.state = {
       apiDataLoaded: false,
       currentProfile: null,
-      currentUser: 7,
+      currentUser: this.props.currentUserId,
       //this trait will need to be set based on props that are passed in from the user
-      seeking: "M"
+      seeking: this.props.seeking
       //should also consider passing in the gender of me to use to filter the "searching for" trait of the user
       // gender: "M"
       //this can all be an object of the current user that passes in all of the information of the user, this will allow for additional data to be passes through the user search query in the SQL request
     }
+    this.handleEditPress = this.handleEditPress.bind(this)
+    this.props.navigation.setParams({
+      handlePress: this.handleEditPress
+    })
+  }
+
+
+  static navigationOptions = ({navigation}) => ({
+      headerRight:
+        <Button onPress={() => navigation.state.params.handlePress()} title='Edit' />,
+        title: "Connection"
+    })
+
+  handleEditPress(){
+    console.log('i made it in click');
+    const {navigate} = this.props.navigation
+    this.props.screenProps = this.state.currentUser
+    navigate("EditScreen", this.state)
   }
   componentDidMount(){
-    // console.log("this.state.searchResults Monitor", this.state.searchResults);
+    this.props.navigation.setParams({handlePress: this.handleEditPress })
+    console.log("My properties Monitor", this.props);
     this.querySearch()
     }
   processSearchResults(){

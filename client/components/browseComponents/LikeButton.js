@@ -14,6 +14,7 @@ export default class LikeButton extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleSubmit(e){
+    console.log(`I am hitting the like button`, this.state);
     let likeData = {
       like_sent: this.props.currentUser,
       like_received: this.props.browsingUser

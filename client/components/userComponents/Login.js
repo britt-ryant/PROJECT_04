@@ -16,6 +16,7 @@ export default class SignUp extends React.Component  {
   }
 
   handleSubmit(e){
+    const {navigate} = this.props.navigation
     services.logIn(this.state)
     .then(result => {
       console.log('I just logged in as', result);
@@ -28,8 +29,10 @@ export default class SignUp extends React.Component  {
           currentUserId: result.data.data.id,
           currentUsername: result.data.data.username,
           currentUserPassword: result.data.data.password,
+          seeking: result.data.data.seeking,
           message: ""
-        })
+        }, () => navigate("BrowseScreen", this.state))
+
       }
     })
     .catch( err => {

@@ -20,7 +20,13 @@ module.exports = {
   },
   getUser(data){
     console.log('in get user', data)
-    return db.one(`SELECT * FROM user_table WHERE username=$[username] AND password=$[password];`, data)
+    return db.one(`SELECT * FROM user_table
+      JOIN
+      user_information
+      ON
+      user_table.id=user_information.user_id
+      WHERE username=$[username]
+      AND password=$[password];`, data)
   },
   getDetails(id){
     return db.one(`SELECT * FROM user_information WHERE user_id=$1`, id)
