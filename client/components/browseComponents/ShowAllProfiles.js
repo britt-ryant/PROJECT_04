@@ -11,7 +11,7 @@ export default class ShowAllProfiles extends React.Component  {
     this.state = {
       apiDataLoaded: false,
       currentProfile: null,
-      currentUser: 3,
+      currentUser: 7,
       //this trait will need to be set based on props that are passed in from the user
       seeking: "M"
       //should also consider passing in the gender of me to use to filter the "searching for" trait of the user

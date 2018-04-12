@@ -33,6 +33,9 @@ INSERT INTO user_table (username, password) VALUES (
 ),(
   'Tiffany',
   '1234'
+),(
+  'Johnathan',
+  '1234'
 );
 
 INSERT INTO user_information (user_id, gender, seeking, description, location_lat, location_lon) VALUES (
@@ -89,6 +92,13 @@ INSERT INTO user_information (user_id, gender, seeking, description, location_la
   'F',
   'M',
   'I am the description for Tiffany',
+  10,
+  20
+),(
+  8,
+  'M',
+  'F',
+  'I am the description for Johnathan',
   10,
   20
 );

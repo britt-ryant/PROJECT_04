@@ -48,6 +48,11 @@ module.exports = {
     ON user_information.user_id=match_table.user_one
     OR
     user_information.user_id=match_table.user_two
+    JOIN
+    user_table
+    ON match_table.user_one=user_table.id
+    OR
+    match_table.user_two=user_table.id
     WHERE
     match_table.user_one=$1
     OR

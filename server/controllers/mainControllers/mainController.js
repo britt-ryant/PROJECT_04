@@ -94,9 +94,12 @@ module.exports = {
     mainDB.getMatches(req.params.id)
     .then(results => {
       // console.log(`Got all the matches`, results)
-      let newResults = results.filter(person => person.user_id !== parseInt(req.params.id))
-      console.log(`This should be the new results`, newResults);
-
+      let newResults = results.filter(person => (person.user_id !== parseInt(req.params.id) && person.id !== parseInt(req.params.id)))
+      console.log(`This should be the new results`, newResults)
+      res.json({
+        message: "got all of the matches",
+        data: newResults
+      })
     })
     .catch(err => {
       console.log(`I am the error for getAllMatches in the controller`, err);

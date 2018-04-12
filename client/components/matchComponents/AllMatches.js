@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextInput, Alert, Button, StyleSheet, Text, View } from 'react-native';
 import services from '../../services/apiServices';
+import Match from './Match';
 
 
 export default class AllMatches extends React.Component {
@@ -18,18 +19,19 @@ export default class AllMatches extends React.Component {
     .then(results => {
       console.log(`I got all of the matches for ${this.state.currentUser}`, results);
       this.setState({
-        apiData: results.data,
+        apiData: results.data.data,
         apiDataLoaded: true
-      })
+      }, () => console.log(`I am the new state`, this.state.apiData))
     })
     .catch(err => {
       console.log(`Something went wrong trying to get ${this.state.currentUser}'s matches`, err);
     })
   }
   renderData(){
+    const allMatches = this.state.apiData.map((person, id) => <Match personData={person} key={id} />)
     return(
       <View>
-        <Text>I am the all matches component</Text>
+        {allMatches}
       </View>
     )
   }
