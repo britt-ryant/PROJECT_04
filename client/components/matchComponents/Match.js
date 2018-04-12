@@ -9,13 +9,21 @@ export default class Match extends React.Component {
     this.state = {
       personData: this.props.personData
     }
+    this.handlePress = this.handlePress.bind(this)
+  }
+
+  handlePress(){
+    console.log(`I am clicked!!!`);
   }
 
   render(){
     console.log(`I am the state!`, this.state);
     return(
       <View>
-        <Text>You matched with: {this.state.personData.username}</Text>
+        <Button
+          title={this.state.personData.username}
+          onPress={this.handlePress}
+        />
       </View>
     )
   }

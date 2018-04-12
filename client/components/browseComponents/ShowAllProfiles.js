@@ -40,6 +40,7 @@ export default class ShowAllProfiles extends React.Component  {
     navigate("EditScreen", this.state)
   }
   componentDidMount(){
+    console.log(`I am mounting`, this.state);
     this.props.navigation.setParams({handlePress: this.handleEditPress })
     // console.log("My properties Monitor", this.props);
     this.querySearch()

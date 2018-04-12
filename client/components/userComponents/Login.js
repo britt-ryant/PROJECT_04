@@ -43,7 +43,6 @@ export default class SignUp extends React.Component  {
     return(
         <View style={styles.tiny}>
             <Text tyle={{marginLeft:10, width: 150, marginTop:70,fontSize:30}}>Log In</Text>
-          {console.log("rendering the state", this.state)}
             <Text>{this.state.message}</Text>
             <TextInput
               style={{marginLeft:10, width: 150, marginTop:50,fontSize:30}}
