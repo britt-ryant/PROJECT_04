@@ -36,7 +36,7 @@ export default class ShowAllProfiles extends React.Component  {
     navigate("EditScreen", this.state)
   }
   componentDidMount(){
-    console.log(`I am mounting`, this.state);
+    // console.log(`I am mounting`, this.state);
     this.props.navigation.setParams({handlePress: this.handleEditPress })
     // console.log("My properties Monitor", this.props);
     this.querySearch()
@@ -133,7 +133,7 @@ export default class ShowAllProfiles extends React.Component  {
   render(){
     return(
         <View style={styles.tiny}>
-          {this.state.apiDataLoaded ? this.renderData() : console.log('loading..')}
+          {this.state.apiDataLoaded ? this.renderData() : "loading"}
         </View>
     )
   }

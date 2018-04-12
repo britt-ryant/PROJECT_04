@@ -12,7 +12,6 @@ module.exports = {
         message: "ok",
         data: response
       })
-      console.log('made a call and finished')
     })
     .catch(error => {
       console.log('You forgot how to do this you idiot!', error);
@@ -21,7 +20,7 @@ module.exports = {
   browseAll(req, res, next){
     mainDB.getAll(req.body)
     .then(results => {
-      console.log("I got the results!!!", results);
+      // console.log("I got the results!!!", results);
       res.json({
         message: "got all of the users",
         data: results
@@ -63,7 +62,7 @@ module.exports = {
     mainDB.newMatch(req.body)
     .then(result => {
       res.locals= result
-      console.log("I am the result", res.locals);
+      // console.log("I am the result", res.locals);
       next()
     }, )
     .catch(err => {
@@ -90,12 +89,12 @@ module.exports = {
     })
   },
   getAllMatches(req, res, next){
-    console.log(`in the mainController, getting all matches`, req.params.id);
+    // console.log(`in the mainController, getting all matches`, req.params.id);
     mainDB.getMatches(req.params.id)
     .then(results => {
       // console.log(`Got all the matches`, results)
       let newResults = results.filter(person => (person.user_id !== parseInt(req.params.id) && person.id !== parseInt(req.params.id)))
-      console.log(`This should be the new results`, newResults)
+      // console.log(`This should be the new results`, newResults)
       res.json({
         message: "got all of the matches",
         data: newResults

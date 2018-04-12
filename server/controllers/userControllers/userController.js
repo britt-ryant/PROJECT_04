@@ -14,7 +14,7 @@ module.exports = {
     })
   },
   new(req, res, next){
-    console.log("I am the req.body", req.body);
+    // console.log("I am the req.body", req.body);
   },
   verifyUserExists(req, res, next){
     userDB.findUser(req.body.username)

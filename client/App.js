@@ -9,6 +9,8 @@ import CreateProfile from './components/userComponents/CreateProfile';
 import DeleteProfile from './components/userComponents/DeleteProfile';
 import ShowAllProfiles from './components/browseComponents/ShowAllProfiles';
 import AllMatches from './components/matchComponents/AllMatches';
+import Match from './components/matchComponents/Match';
+import OneMatch from './components/matchComponents/OneMatch';
 import {StackNavigator} from 'react-navigation'
 
 
@@ -72,7 +74,9 @@ import {StackNavigator} from 'react-navigation'
     CreateProfileScreen: {screen: mapNavigationStateParamsToProps(CreateProfile)},
     BrowseScreen: {screen: mapNavigationStateParamsToProps(ShowAllProfiles)},
     EditScreen: {screen: mapNavigationStateParamsToProps(EditProfile)},
-    MatchesScreen: {screen: mapNavigationStateParamsToProps(AllMatches)}
+    MatchesScreen: {screen: mapNavigationStateParamsToProps(AllMatches)},
+    MatchScreen: {screen: mapNavigationStateParamsToProps(Match)},
+    OneMatchScreen: {screen: mapNavigationStateParamsToProps(OneMatch)},
   })
 
 

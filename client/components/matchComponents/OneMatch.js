@@ -2,7 +2,7 @@ import React from 'react';
 import { TextInput, Alert, Button, StyleSheet, Text, View } from 'react-native';
 import services from '../../services/apiServices';
 
-export default class OneMatch extends Component {
+export default class OneMatch extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -12,7 +12,7 @@ export default class OneMatch extends Component {
       messageHistory: null,
       messagesReceived: false
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
+    // this.handleSubmit = this.handleSubmit.bind(this)
   }
   componentDidMount(){
     services.getAllMessages(this.state)

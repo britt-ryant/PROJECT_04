@@ -10,14 +10,22 @@ export default class Match extends React.Component {
       personData: this.props.personData
     }
     this.handlePress = this.handlePress.bind(this)
+    this.navigate = this.navigate.bind(this)
+
   }
 
   handlePress(){
-    console.log(`I am clicked!!!`);
+    console.log(`I am clicked!!!`, this.props);
+    this.navigate()
+  }
+
+  navigate(){
+    const {navigate} = this.props.navigation
+    this.props.screenProps = this.state.personData.user_one
+    navigate("OneMatchScreen", this.state)
   }
 
   render(){
-    console.log(`I am the state!`, this.state);
     return(
       <View>
         <Button

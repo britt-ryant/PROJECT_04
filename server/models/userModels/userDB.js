@@ -7,11 +7,11 @@ module.exports = {
     return db.many(`SELECT * FROM user_table;`)
   },
   findUser(username){
-    console.log(username);
+    // console.log(username);
     return db.one(`SELECT * FROM user_table WHERE username=$1;`, username)
   },
   createUser(data){
-    console.log("new user being created", data);
+    // console.log("new user being created", data);
     return db.one(`INSERT INTO user_table (username, password) VALUES
     (
       $[username],
@@ -19,7 +19,7 @@ module.exports = {
     ) RETURNING *;`, data)
   },
   getUser(data){
-    console.log('in get user', data)
+    // console.log('in get user', data)
     return db.one(`SELECT * FROM user_table
       JOIN
       user_information
@@ -32,7 +32,7 @@ module.exports = {
     return db.one(`SELECT * FROM user_information WHERE user_id=$1`, id)
   },
   updateInfo(data){
-    console.log(data);
+    // console.log(data);
     return db.one(`UPDATE user_information
       SET
       gender=$[gender],
@@ -52,11 +52,11 @@ module.exports = {
     )RETURNING *;`, data)
   },
   remove(id){
-    console.log(id);
+    // console.log(id);
     return db.none(`DELETE FROM user_information WHERE user_id=$1`, id)
   },
   delete(id){
-    console.log(id);
+    // console.log(id);
     return db.none('DELETE FROM user_table WHERE id=$1', id)
   }
 }
