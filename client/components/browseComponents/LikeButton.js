@@ -14,7 +14,7 @@ export default class LikeButton extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleSubmit(e){
-    console.log(`I am hitting the like button`, this.state);
+    // console.log(`I am hitting the like button`, this.state);
     let likeData = {
       like_sent: this.props.currentUser,
       like_received: this.props.browsingUser
@@ -30,12 +30,12 @@ export default class LikeButton extends React.Component {
   checkForLikeBack(data){
     services.checkForMatch(data)
     .then(result => {
-      console.log(`I am the result for check for match!`, result.data.data);
+      // console.log(`I am the result for check for match!`, result.data.data);
       if(result.data.data === 1){
         //shoot this to the parent to handle the match
         this.props.handleMatch()
       } else {
-        console.log("not a match, but can still call any function that I want!");
+        // console.log("not a match, but can still call any function that I want!");
         this.props.handleLike()
       }
     })

@@ -26,7 +26,7 @@ handlePress(){
     services.newUser(this.state)
     .then(result => {
       if(result.data.data === 0){
-        console.log('I am the result of the post request and the username exists', result);
+        // console.log('I am the result of the post request and the username exists', result);
         this.setState({
           fireRedirect: false,
           message: result.data.message

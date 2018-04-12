@@ -116,7 +116,7 @@ services.createMatch = (data) => {
 }
 
 services.getAllMatches = (data) => {
-  console.log(`In apiServices, getAllMatches`, data);
+  // console.log(`In apiServices, getAllMatches`, data);
   return axios.request({
     url: `http://localhost:3001/api/match/${data}`,
     method: 'GET'

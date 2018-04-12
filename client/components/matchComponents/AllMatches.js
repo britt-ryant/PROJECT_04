@@ -9,12 +9,13 @@ export default class AllMatches extends React.Component {
     super(props);
     this.state = {
       //currentUser: this.props.currentUser
-      currentUser: 1,
+      currentUser: this.props.currentUser,
       oneUser: null,
 
     }
   }
   componentDidMount(){
+    console.log("I am getting all matches!", this.props);
     services.getAllMatches(this.state.currentUser)
     .then(results => {
       console.log(`I got all of the matches for ${this.state.currentUser}`, results);

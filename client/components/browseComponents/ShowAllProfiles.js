@@ -19,6 +19,7 @@ export default class ShowAllProfiles extends React.Component  {
       // gender: "M"
       //this can all be an object of the current user that passes in all of the information of the user, this will allow for additional data to be passes through the user search query in the SQL request
     }
+    this.handleNavigation = this.handleNavigation.bind(this)
     this.handleEditPress = this.handleEditPress.bind(this)
     this.props.navigation.setParams({
       handlePress: this.handleEditPress
@@ -33,14 +34,14 @@ export default class ShowAllProfiles extends React.Component  {
     })
 
   handleEditPress(){
-    console.log('i made it in click');
+    // console.log('i made it in click');
     const {navigate} = this.props.navigation
     this.props.screenProps = this.state.currentUser
     navigate("EditScreen", this.state)
   }
   componentDidMount(){
     this.props.navigation.setParams({handlePress: this.handleEditPress })
-    console.log("My properties Monitor", this.props);
+    // console.log("My properties Monitor", this.props);
     this.querySearch()
     }
   processSearchResults(){
@@ -76,7 +77,7 @@ export default class ShowAllProfiles extends React.Component  {
   handleMatch(){
     services.createMatch(this.state)
     .then(result => {
-      console.log("I am the result of inserting into the match table!", result);
+      // console.log("I am the result of inserting into the match table!", result);
       this.setState({
         match: true,
       }, () => this.messageOption())
@@ -86,8 +87,14 @@ export default class ShowAllProfiles extends React.Component  {
     })
   }
   messageOption(){
+    console.log(`I am a match!`);
     //Alert that can direct to either continue or keep swiping or I can use the previously modified state to address this situation but I think this function chain is best...
     this.handleLike()
+  }
+  handleNavigation(){
+    console.log(`I was clicked to handle navigation!`);
+    const {navigate} = this.props.navigation
+    navigate("MatchesScreen", this.state)
   }
 
 
@@ -108,6 +115,10 @@ export default class ShowAllProfiles extends React.Component  {
         />
         <UnlikeButton
           handleLike={() => this.handleLike()}
+        />
+        <Button
+          onPress={this.handleNavigation}
+          title="View your matches"
         />
       </View>
     )

@@ -42,7 +42,7 @@ module.exports = {
     ) RETURNING *;`, data)
   },
   getMatches(data){
-    console.log(`In the model, getting all of the matches for the user ${data}`);
+    // console.log(`In the model, getting all of the matches for the user ${data}`);
     return db.many(`SELECT * FROM match_table
     JOIN user_information
     ON user_information.user_id=match_table.user_one

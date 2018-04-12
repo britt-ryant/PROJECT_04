@@ -20,15 +20,15 @@ export default class CreateProfile extends React.Component  {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   componentDidMount(){
-    console.log(`I AM THE CREATE PROFILE Component`, this.props);
+    // console.log(`I AM THE CREATE PROFILE Component`, this.props);
   }
   handleSubmit(e){
     const {navigate} = this.props.navigation
-    console.log('I am the new state of the apppppppp!!!!', this.state);
+    // console.log('I am the new state of the apppppppp!!!!', this.state);
     services.createProfileInfo(this.state)
     .then(result => {
       // navigate("BrowseScreen")
-      console.log(`I just created a new profile and here is the result!`, result);
+      // console.log(`I just created a new profile and here is the result!`, result);
       this.setState({
         seeking: result.data.data.seeking,
         currentUserId: result.data.data.id

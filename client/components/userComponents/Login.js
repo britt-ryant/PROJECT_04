@@ -19,7 +19,7 @@ export default class SignUp extends React.Component  {
     const {navigate} = this.props.navigation
     services.logIn(this.state)
     .then(result => {
-      console.log('I just logged in as', result);
+      // console.log('I just logged in as', result);
       if(result.data.data === 0){
         this.setState({
           message: result.data.message
