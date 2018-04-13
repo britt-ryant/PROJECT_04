@@ -22,7 +22,7 @@ module.exports = {
     ) RETURNING *;`, data)
   },
   check(data){
-    // console.log("Im in the model", data);
+    console.log("Im in the model", data);
     return db.one(`SELECT FROM like_table WHERE like_sent=$[like_sent] AND like_received=$[like_received];`, data)
   },
   newMatch(data){

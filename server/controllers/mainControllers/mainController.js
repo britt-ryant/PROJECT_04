@@ -45,12 +45,14 @@ module.exports = {
   checkForMatch(req, res, next){
     mainDB.check(req.body)
     .then(result => {
+      console.log(`I am checking for matches!`, result);
       res.json({
         message: "Its a Match!!",
         data: 1
       })
     })
     .catch(err => {
+      console.log(`I am checking for errors`, err);
       res.json({
         message: "no matches found",
         data: 0
