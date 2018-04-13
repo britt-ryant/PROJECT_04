@@ -57,5 +57,22 @@ module.exports = {
     match_table.user_one=$1
     OR
     match_table.user_two=$1;`, data)
+  },
+  getMessages(data){
+    console.log(`I am in the model for get messages ----> `, data);
+    return db.many(`SELECT * FROM message_table
+                    WHERE sent_user_id=$[sent_user_id]
+                    AND received_user_id=$[received_user_id]
+                    OR sent_user_id=$[received_user_id]
+                    AND received_user_id=$[sent_user_id]
+                    ORDER BY id;`, data)
+  },
+  newMessage(data){
+    console.log(`In the model, here is the new message that I am trying to insert ---> `, data);
+    return db.one(`INSERT INTO message_table (sent_user_id, received_user_id, message) VALUES (
+      $[sent_user_id],
+      $[received_user_id],
+      $[message]
+    ) RETURNING *;`, data)
   }
 }

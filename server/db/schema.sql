@@ -41,6 +41,7 @@ CREATE TABLE match_table (
 );
 
 CREATE TABLE message_table (
+  id SERIAL PRIMARY KEY,
   sent_user_id INTEGER,
   received_user_id INTEGER,
   message VARCHAR(500),

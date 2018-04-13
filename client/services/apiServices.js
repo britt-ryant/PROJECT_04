@@ -122,4 +122,29 @@ services.getAllMatches = (data) => {
   })
 }
 
+services.getAllMessages = (data) => {
+  console.log(`In api services, here is the data I am passing to the apiServices`, data);
+  return axios.request({
+    url: `http://localhost:3001/api/message`,
+    method: 'POST',
+    data: {
+      sent_user_id: data.currentUser,
+      received_user_id: data.targetUserId
+    }
+  })
+}
+
+services.sendMessage = (data) => {
+  console.log(`This is the imformation that I am trying to send to the other person`, data);
+  return axios.request({
+    url: `http://localhost:3001/api/new_message`,
+    method: "POST",
+    data: {
+      sent_user_id: data.currentUser,
+      received_user_id: data.targetUserId,
+      message: data.message
+    }
+  })
+}
+
 export default services

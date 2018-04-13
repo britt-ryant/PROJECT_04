@@ -103,6 +103,30 @@ module.exports = {
     .catch(err => {
       console.log(`I am the error for getAllMatches in the controller`, err);
     })
+  },
+  getAllMessages(req, res, next){
+    mainDB.getMessages(req.body)
+    .then(results => {
+      res.json({
+        message: "ok",
+        data: results
+      })
+    })
+    .catch(err => {
+      console.log(`I errored out in the controller, getAllMessages`, err);
+    })
+  },
+  makeNewMessage(req, res, next){
+    mainDB.newMessage(req.body)
+    .then(result => {
+      res.json({
+        message: "post was successful",
+        data: result
+      });
+    })
+    .catch(err => {
+      console.log(`messed up in the controller`, err);
+    })
   }
 
   }
