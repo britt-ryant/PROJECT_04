@@ -35,7 +35,7 @@ app.use('/api', mainRouter)
 
 io.on('connection', function(socket){
   socket.on('enter', (payload) => {
-    console.log(`${payload.stuff}`);
+    console.log(` ${payload.stuff}`);
     io.emit('send message', {
       data: payload.stuff
     })
