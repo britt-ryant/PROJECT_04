@@ -13,6 +13,8 @@ const cors = require('cors');
 const PORT = process.env.PORT || 3001;
 
 const app = express();
+const http = require('http').Server(app)
+const io = require('socket.io')(http)
 
 
 const mainRouter = require('./routes/mainRoutes/mainRouter');
@@ -31,7 +33,16 @@ app.set(`view engine`, `ejs`);
 app.use('/user', userRouter)
 app.use('/api', mainRouter)
 
+io.on('connection', function(socket){
+  socket.on('enter', (payload) => {
+    console.log(`${payload.stuff}`);
+    io.emit('send message', {
+      data: payload.stuff
+    })
+  })
+})
 
-app.listen(PORT, () => {
+
+http.listen(PORT, () => {
   console.log(`The server is up and running, listening on port 🍆  ${PORT}`);
 })

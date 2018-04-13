@@ -3,7 +3,9 @@ import { TextInput, Alert, Button, StyleSheet, Text, View } from 'react-native';
 import services from '../../services/apiServices';
 import LikeButton from './LikeButton';
 import UnlikeButton from './UnlikeButton';
-import StackNavigator from 'react-navigation'
+import StackNavigator from 'react-navigation';
+import io from 'socket.io-client';
+const socket = io('http://localhost:3001');
 
 
 export default class ShowAllProfiles extends React.Component  {
@@ -13,13 +15,15 @@ export default class ShowAllProfiles extends React.Component  {
       apiDataLoaded: false,
       currentProfile: null,
       currentUser: this.props.currentUserId,
-      seeking: this.props.seeking
+      seeking: this.props.seeking,
+      display: "asdfafaf"
     }
     this.handleNavigation = this.handleNavigation.bind(this)
     this.handleEditPress = this.handleEditPress.bind(this)
     this.props.navigation.setParams({
       handlePress: this.handleEditPress
     })
+    this.handleChange = this.handleChange.bind(this)
   }
 
 
@@ -36,6 +40,12 @@ export default class ShowAllProfiles extends React.Component  {
     navigate("EditScreen", this.state)
   }
   componentDidMount(){
+    socket.on('send message', (payload) => {
+      console.log(`I am the new payload`, payload);
+      this.setState({
+        display: payload.data
+      }, ()=> console.log(`---------------->`, this.state.display))
+    })
     // console.log(`I am mounting`, this.state);
     this.props.navigation.setParams({handlePress: this.handleEditPress })
     // console.log("My properties Monitor", this.props);
@@ -105,11 +115,22 @@ export default class ShowAllProfiles extends React.Component  {
   }
 
 
+
+  handleChange(data){
+    console.log('loaded our sockets', socket)
+    socket.emit('enter', {
+      stuff: data
+    })
+}
+
+
+
   renderData(){
     let currentUser = this.state.currentUser;
     let currentProfile = this.state.currentProfile.user_id;
     return (
       <View style={styles.tiny}>
+        <Text>{this.state.display}</Text>
         <Text>My name is {this.state.currentProfile.username}</Text>
         <Text>I am a {this.state.currentProfile.gender}</Text>
         <Text>Looking for a {this.state.currentProfile.seeking}</Text>
@@ -126,6 +147,12 @@ export default class ShowAllProfiles extends React.Component  {
         <Button
           onPress={this.handleNavigation}
           title="View your matches"
+        />
+        <TextInput
+          style={{marginLeft:15, width: 150, marginTop:5,fontSize:30,marginBottom: 15}}
+          placeholder='TESTING'
+          onChangeText={(input) => this.handleChange(input)}
+          value={this.state.password}
         />
       </View>
     )
