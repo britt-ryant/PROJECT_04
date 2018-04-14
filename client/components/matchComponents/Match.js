@@ -7,21 +7,29 @@ export default class Match extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      personData: this.props.personData
+      personData: this.props.personData,
+      currentUser: this.props.currentUser,
+      targetUserId: this.props.targetUserId,
+      targetUsername: this.props.targetUsername,
+      description: this.props.description,
+      image: this.props.image
     }
     this.handlePress = this.handlePress.bind(this)
     this.navigate = this.navigate.bind(this)
 
   }
+  componentDidMount(){
+    console.log(`I am the personData for each person!`, this.state);
+  }
 
   handlePress(){
-    console.log(`I am clicked!!!`, this.props);
+    // console.log(`I am clicked!!!`, this.props);
     this.navigate()
   }
 
   navigate(){
     const {navigate} = this.props.navigation
-    this.props.screenProps = this.state.personData.user_one
+    this.props.screenProps = this.state.currentUser
     navigate("OneMatchScreen", this.state)
   }
 
@@ -29,7 +37,7 @@ export default class Match extends React.Component {
     return(
       <View>
         <Button
-          title={this.state.personData.username}
+          title={this.state.targetUsername}
           onPress={this.handlePress}
         />
       </View>

@@ -17,10 +17,10 @@ export default class AllMatches extends React.Component {
     this.navigate = this.navigate.bind(this)
   }
   componentDidMount(){
-    console.log("I am getting all matches!", this.props);
+    console.log("I am getting all matches!", this.state);
     services.getAllMatches(this.state.currentUserId)
     .then(results => {
-      // console.log(`I got all of the matches for ${this.state.currentUserId}`, results);
+      console.log(`I got all of the matches for ${this.state.currentUserId}`, results);
       this.setState({
         apiData: results.data.data,
         apiDataLoaded: true
@@ -37,7 +37,16 @@ export default class AllMatches extends React.Component {
     navigate("BrowseScreen", this.state)
   }
   renderData(){
-    const allMatches = this.state.apiData.map((person, id) => <Match navigation={this.props.navigation} personData={person} key={id} />)
+    const allMatches = this.state.apiData.map((person, id) =>
+    <Match
+      navigation={this.props.navigation}
+      currentUser={this.state.currentUserId}
+      targetUserId={person.id}
+      personData={person}
+      targetUsername={person.username}
+      description={person.description}
+      image={person.image}
+      key={id} />)
     return(
       <View>
         {allMatches}

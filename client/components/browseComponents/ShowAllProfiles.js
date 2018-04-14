@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextInput, Alert, Button, StyleSheet, Text, View } from 'react-native';
+import { TextInput, Alert, Button, StyleSheet, Text, View, Image } from 'react-native';
 import services from '../../services/apiServices';
 import LikeButton from './LikeButton';
 import UnlikeButton from './UnlikeButton';
@@ -108,11 +108,17 @@ export default class ShowAllProfiles extends React.Component  {
   renderData(){
     let currentUser = this.state.currentUser;
     let currentProfile = this.state.currentProfile.user_id;
+    // console.log(`I am the image----> `, this.state.currentProfile.image);
     return (
       <View style={styles.tiny}>
         <Text>My name is {this.state.currentProfile.username}</Text>
-        <Text>I am a {this.state.currentProfile.gender}</Text>
-        <Text>Looking for a {this.state.currentProfile.seeking}</Text>
+        <Image
+          source={{uri:this.state.currentProfile.image}}
+          style={{width: 300, height: 300}}
+          resizeMode='cover'
+        />
+        {/* <Text>I am a {this.state.currentProfile.gender}</Text>
+        <Text>Looking for a {this.state.currentProfile.seeking}</Text> */}
         <Text>About me: {this.state.currentProfile.description}</Text>
         <LikeButton
           handleLike={() => this.handleLike()}
