@@ -17,16 +17,18 @@ export default class OneMatch extends React.Component {
       description: this.props.description,
       image: this.props.image,
       renderMessages: false,
-      apiDataRecieved: false
+      apiDataRecieved: false,
+      seeking: this.props.personData.gender
     }
     // this.handleSubmit = this.handleSubmit.bind(this)
-    // this.handleNavigation = this.handleNavigation.bind(this)
+    this.handleNavigation = this.handleNavigation.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     // this.textInput = this.textInput.bind(this)
   }
   componentDidMount(){
     console.log(`I am the current User`, this.state.currentUser);
     console.log('I am the target user', this.state.targetUserId);
+    console.log(`I am the gender`, this.props);
     // console.log(`I am the props for the OneMatch Component`, this.props, "And I am the state!", this.state);
     let msgInput = {
       currentUser: this.state.currentUser,
@@ -45,9 +47,11 @@ export default class OneMatch extends React.Component {
       console.log(`There was an error receiving data from the back end `, err);
     })
   }
-  // handleNavigation(){
-  //   console.log(`I am the handleNavigation function and the message button was clicked!`);
-  // }
+  handleNavigation(){
+    console.log(`I am the handleNavigation function and the message button was clicked!`);
+    const {navigate} = this.props.navigation
+    navigate("MatchesScreen", this.state)
+  }
   handleSubmit(){
     // this.textInput.clear()
     // console.log(`This is the state of the new message`, this.state);
@@ -73,7 +77,6 @@ export default class OneMatch extends React.Component {
   whatToRender(){
     return  <View>{this.state.renderMessages ? this.renderMessageScreen() : this.renderInfo()}</View>
   }
-
   renderMessageScreen(){
     // console.log('loaded a message screen', this.state)
     const messages = this.state.messagesReceived.map((message, id) => <MessageComponent {...message} currentUser={this.state.targetUserId} key={id} />)
@@ -102,6 +105,10 @@ export default class OneMatch extends React.Component {
           source={{uri: this.state.image}}
           style={{width: 300, height: 300}}
           resizeMode='cover'
+        />
+        <Button
+          title="Back to Matches"
+          onPress={this.handleNavigation}
         />
       </View>
     )

@@ -46,6 +46,7 @@ export default class AllMatches extends React.Component {
       targetUsername={person.username}
       description={person.description}
       image={person.image}
+      gender={person.gender}
       key={id} />)
     return(
       <View>
