@@ -46,7 +46,8 @@ services.updateProfileInfo = (data) => {
                 gender: data.gender,
                 seeking: data.seeking,
                 description: data.description,
-                user_id: data.currentUserId
+                user_id: data.currentUserId,
+                image: data.image
               }
   })
 }
@@ -58,7 +59,8 @@ services.createProfileInfo = (data) => {
                 gender: data.gender,
                 seeking: data.seeking,
                 description: data.description,
-                user_id: data.userId
+                user_id: data.userId,
+                image: data.image
               }
   })
 }

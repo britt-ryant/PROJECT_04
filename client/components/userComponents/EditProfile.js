@@ -14,7 +14,8 @@ export default class EditProfile extends React.Component  {
       message: "",
       gender: "",
       seeking: "",
-      description: ""
+      description: "",
+      image: ""
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -28,7 +29,8 @@ export default class EditProfile extends React.Component  {
         userData: result.data.data,
         gender: result.data.data.gender,
         seeking: result.data.data.seeking,
-        description: result.data.data.description
+        description: result.data.data.description,
+        image: result.data.data.image
       })
     })
     .catch(err => {
@@ -52,6 +54,11 @@ export default class EditProfile extends React.Component  {
     return(
       <View style={styles.tiny}>
         <Text>{this.state.message}</Text>
+        <TextInput
+          style={{marginLeft:10, width: 150, marginTop:50,fontSize:30}}
+          onChangeText={(image) => this.setState({image})}
+          value={this.state.image}
+        />
         <TextInput
           style={{marginLeft:10, width: 150, marginTop:50,fontSize:30}}
           placeholder={this.state.gender}

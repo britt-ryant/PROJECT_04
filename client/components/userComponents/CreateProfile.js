@@ -15,7 +15,8 @@ export default class CreateProfile extends React.Component  {
       message: "",
       gender: "",
       seeking: "",
-      description: ""
+      description: "",
+      image: ""
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -43,6 +44,12 @@ export default class CreateProfile extends React.Component  {
     return(
       <View style={styles.tiny}>
         <Text>{this.state.message}</Text>
+        <TextInput
+          style={{marginLeft:15, marginTop:5,fontSize:30,marginBottom: 15}}
+          placeholder="Upload Image"
+          onChangeText={(image) => this.setState({image})}
+          value={this.state.image}
+        />
         <TextInput
           style={{marginLeft:10, width: 150, marginTop:50,fontSize:30}}
           placeholder="I am a..."

@@ -37,18 +37,20 @@ module.exports = {
       SET
       gender=$[gender],
       seeking=$[seeking],
-      description=$[description]
+      description=$[description],
+      image=$[image]
       WHERE
       user_id=$[user_id]
       RETURNING *;`,
     data)
   },
   insertInfo(data){
-    return db.one(`INSERT INTO user_information (user_id, gender, seeking, description) VALUES (
+    return db.one(`INSERT INTO user_information (user_id, gender, seeking, description, image) VALUES (
       $[user_id],
       $[gender],
       $[seeking],
-      $[description]
+      $[description],
+      $[image]
     )RETURNING *;`, data)
   },
   remove(id){

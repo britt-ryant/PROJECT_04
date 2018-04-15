@@ -43,7 +43,8 @@ module.exports = {
   },
   getMatches(data){
     // console.log(`In the model, getting all of the matches for the user ${data}`);
-    return db.many(`SELECT * FROM match_table
+    return db.many(`SELECT *
+    FROM match_table
     JOIN user_information
     ON user_information.user_id=match_table.user_one
     OR
@@ -59,7 +60,7 @@ module.exports = {
     match_table.user_two=$1;`, data)
   },
   getMessages(data){
-    console.log(`I am in the model for get messages ----> `, data);
+    // console.log(`I am in the model for get messages ----> `, data);
     return db.many(`SELECT * FROM message_table
                     WHERE sent_user_id=$[sent_user_id]
                     AND received_user_id=$[received_user_id]
@@ -68,7 +69,7 @@ module.exports = {
                     ORDER BY id;`, data)
   },
   newMessage(data){
-    console.log(`In the model, here is the new message that I am trying to insert ---> `, data);
+    // console.log(`In the model, here is the new message that I am trying to insert ---> `, data);
     return db.one(`INSERT INTO message_table (sent_user_id, received_user_id, message) VALUES (
       $[sent_user_id],
       $[received_user_id],

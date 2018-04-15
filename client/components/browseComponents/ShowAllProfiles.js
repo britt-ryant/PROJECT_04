@@ -17,8 +17,10 @@ export default class ShowAllProfiles extends React.Component  {
     }
     this.handleNavigation = this.handleNavigation.bind(this)
     this.handleEditPress = this.handleEditPress.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
     this.props.navigation.setParams({
-      handlePress: this.handleEditPress
+      handlePress: this.handleEditPress,
+      handleSecondPress: this.handleLogout
     })
   }
 
@@ -26,8 +28,15 @@ export default class ShowAllProfiles extends React.Component  {
   static navigationOptions = ({navigation}) => ({
       headerRight:
         <Button onPress={() => navigation.state.params.handlePress()} title='Edit' />,
-        title: "Connection"
+      title: "Connection",
+      headerLeft: <Button onPress={() => navigation.state.params.handleSecondPress()} title='Logout' />
     })
+
+  handleLogout(){
+    const {navigate} = this.props.navigation
+    // this.props.screenProps = this.state.currentUser
+    navigate("SignupScreen")
+  }
 
   handleEditPress(){
     // console.log('i made it in click');
