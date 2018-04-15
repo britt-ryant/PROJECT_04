@@ -21,6 +21,7 @@ export default class EditProfile extends React.Component  {
   }
 
   componentDidMount(){
+    console.log(`SOMETHING IS WORNG HERE `, this.state.currentUserId);
     services.getProfileInfo(this.state.currentUserId)
     .then(result => {
       console.log('I found the userdata!', result);

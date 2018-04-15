@@ -33,7 +33,7 @@ services.logIn = (data) => {
 }
 
 services.getProfileInfo = (id) => {
-  // console.log("in api data");
+  console.log("in api data", id);
   return axios.get(`http://localhost:3001/user/profiles/${id}`)
 }
 
@@ -72,12 +72,13 @@ services.nuke = (id) => {
 }
 
 services.getAllProfiles = (data) => {
-  // console.log("I am the data for show all", data);
+  console.log("I am the data for show all", data);
   return axios.request({
     url: `http://localhost:3001/api`,
     method: "POST",
     data: {
-      gender: data,
+      gender: data.seeking,
+      currentUser: data.currentUser
       // proximity: data.proximity
     }
   })
@@ -95,7 +96,7 @@ services.addToLikeTable = (data) => {
   })
 }
 services.checkForMatch = (data) => {
-  // console.log("Inside apiServices", data);
+  console.log("Inside apiServices", data);
   return axios.request({
     url: 'http://localhost:3001/api/check',
     method: "POST",

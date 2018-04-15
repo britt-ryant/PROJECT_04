@@ -16,8 +16,12 @@ export default class AllMatches extends React.Component {
     }
     this.navigate = this.navigate.bind(this)
   }
+  static navigationOptions = ({navigation}) => ({
+      headerLeft: null,
+      title: "Matches"
+  })
   componentDidMount(){
-    console.log("I am getting all matches!", this.state);
+    // console.log("I am getting all matches!", this.state);
     services.getAllMatches(this.state.currentUserId)
     .then(results => {
       console.log(`I got all of the matches for ${this.state.currentUserId}`, results);
@@ -30,6 +34,12 @@ export default class AllMatches extends React.Component {
       console.log(`Something went wrong trying to get ${this.state.currentUserId}'s matches`, err);
     })
   }
+
+  removeDuplicates(myArr, prop) {
+    return myArr.filter((obj, pos, arr) => {
+        return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
+    });
+}
 
   navigate(){
     const {navigate} = this.props.navigation

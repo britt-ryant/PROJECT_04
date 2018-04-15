@@ -43,9 +43,10 @@ module.exports = {
     })
   },
   checkForMatch(req, res, next){
+    console.log(`In the controller`, req.body);
     mainDB.check(req.body)
     .then(result => {
-      console.log(`I am checking for matches!`, result);
+      // console.log(`I am checking for matches!`, result);
       res.json({
         message: "Its a Match!!",
         data: 1
@@ -94,9 +95,9 @@ module.exports = {
     // console.log(`in the mainController, getting all matches`, req.params.id);
     mainDB.getMatches(req.params.id)
     .then(results => {
-      console.log(`Got all the matches`, results)
+      // console.log(`Got all the matches----->`, results)
       let newResults = results.filter(person => (person.user_id !== parseInt(req.params.id) && person.id !== parseInt(req.params.id)))
-      console.log(`I am the new results!`, newResults);
+      console.log(`I am the map!`,newResults);
       res.json({
         message: "got all of the matches",
         data: newResults

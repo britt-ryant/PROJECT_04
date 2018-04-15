@@ -23,27 +23,33 @@ handlePress(){
   handleSubmit(e){
     const {navigate} = this.props.navigation
     console.log(this.state);
-    services.newUser(this.state)
-    .then(result => {
-      if(result.data.data === 0){
-        // console.log('I am the result of the post request and the username exists', result);
-        this.setState({
-          fireRedirect: false,
-          message: result.data.message
-        })
-      } else {
-        this.setState({
-          fireRedirect: true,
-          message: "",
-          newUserId: result.data.data.id,
-          newUsername: result.data.data.username,
-          newUserPassword: result.data.password
-        }, () => navigate("CreateProfileScreen", this.state))
-      }
-    })
-    .catch( err => {
-      console.log("I am the error on the sign up page", err);
-    })
+    if(this.state.username !== "" && this.state.password !== ""){
+      services.newUser(this.state)
+      .then(result => {
+        if(result.data.data === 0){
+          // console.log('I am the result of the post request and the username exists', result);
+          this.setState({
+            fireRedirect: false,
+            message: result.data.message
+          })
+        } else {
+          this.setState({
+            fireRedirect: true,
+            message: "",
+            newUserId: result.data.data.id,
+            newUsername: result.data.data.username,
+            newUserPassword: result.data.password
+          }, () => navigate("CreateProfileScreen", this.state))
+        }
+      })
+      .catch( err => {
+        console.log("I am the error on the sign up page", err);
+      })
+    } else {
+      this.setState({
+        message: "Please enter a vaild Username and Password!"
+      })
+    }
   }
   render(){
     return(

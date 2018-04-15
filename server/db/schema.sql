@@ -36,6 +36,7 @@ CREATE TABLE like_table (
 );
 
 CREATE TABLE match_table (
+  id SERIAL PRIMARY KEY,
   user_one INTEGER,
   user_two INTEGER
 );

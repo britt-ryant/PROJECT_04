@@ -25,10 +25,14 @@ export default class OneMatch extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     // this.textInput = this.textInput.bind(this)
   }
+  static navigationOptions = ({navigation}) => ({
+      headerLeft: null,
+      title: "It's a Match!"
+  })
   componentDidMount(){
-    console.log(`I am the current User`, this.state.currentUser);
-    console.log('I am the target user', this.state.targetUserId);
-    console.log(`I am the gender`, this.props);
+    // console.log(`I am the current User`, this.state.currentUser);
+    // console.log('I am the target user', this.state.targetUserId);
+    // console.log(`I am the gender`, this.props);
     // console.log(`I am the props for the OneMatch Component`, this.props, "And I am the state!", this.state);
     let msgInput = {
       currentUser: this.state.currentUser,
@@ -60,19 +64,21 @@ export default class OneMatch extends React.Component {
       targetUserId: this.state.targetUserId,
       message: this.state.message
     }
-    services.sendMessage(msgInput)
-    .then(result => {
-      // console.log(`this is the result of the new message`, result);
-      let currentState = this.state.messagesReceived;
-      currentState.push(result.data.data);
-      this.setState({
-        messagesReceived: currentState,
-        message: "",
+    if(msgInput.message !== ""){
+      services.sendMessage(msgInput)
+      .then(result => {
+        // console.log(`this is the result of the new message`, result);
+        let currentState = this.state.messagesReceived;
+        currentState.push(result.data.data);
+        this.setState({
+          messagesReceived: currentState,
+          message: "",
+        })
       })
-    })
-    .catch(err => {
-      console.log(`Opps something went wrong`, err);
-    })
+      .catch(err => {
+        console.log(`Opps something went wrong`, err);
+      })
+    }
   }
   whatToRender(){
     return  <View>{this.state.renderMessages ? this.renderMessageScreen() : this.renderInfo()}</View>
@@ -117,12 +123,12 @@ export default class OneMatch extends React.Component {
   render(){
     return(
       <View>
-        <Text>{this.state.targetUsername}</Text>
-        {this.state.apiDataRecieved ? this.whatToRender() : ''}
         <Button
           title={this.state.renderMessages ? `See ${this.state.targetUsername}'s info` : `Message ${this.state.targetUsername}`}
           onPress={() => this.setState({renderMessages: !this.state.renderMessages})}
         />
+        <Text>{this.state.targetUsername}</Text>
+        {this.state.apiDataRecieved ? this.whatToRender() : ''}
       </View>
     )
   }

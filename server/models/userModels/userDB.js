@@ -19,7 +19,7 @@ module.exports = {
     ) RETURNING *;`, data)
   },
   getUser(data){
-    // console.log('in get user', data)
+    console.log('in get user', data)
     return db.one(`SELECT * FROM user_table
       JOIN
       user_information

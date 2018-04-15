@@ -28,6 +28,7 @@ export default class LikeButton extends React.Component {
     })
   }
   checkForLikeBack(data){
+    console.log('Making it here ', data);
     services.checkForMatch(data)
     .then(result => {
       // console.log(`I am the result for check for match!`, result.data.data);

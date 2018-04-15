@@ -7,6 +7,7 @@ module.exports = {
   //   return db.many(`SELECT * FROM test_table;`)
   // },
   getAll(data){
+    console.log(`I am the get all data ----> `, data);
     return db.many(`SELECT * FROM user_information
       JOIN
       user_table
@@ -23,7 +24,7 @@ module.exports = {
   },
   check(data){
     console.log("Im in the model", data);
-    return db.one(`SELECT FROM like_table WHERE like_sent=$[like_sent] AND like_received=$[like_received];`, data)
+    return db.many(`SELECT * FROM like_table WHERE like_sent=$[like_sent] AND like_received=$[like_received];`, data)
   },
   newMatch(data){
     // console.log("Going into the match table in the db as a new match ", data);
@@ -42,7 +43,9 @@ module.exports = {
     ) RETURNING *;`, data)
   },
   getMatches(data){
-    // console.log(`In the model, getting all of the matches for the user ${data}`);
+    // WHERE id=(
+    // SELECT max(id) FROM table
+    // )
     return db.many(`SELECT *
     FROM match_table
     JOIN user_information
@@ -57,7 +60,8 @@ module.exports = {
     WHERE
     match_table.user_one=$1
     OR
-    match_table.user_two=$1;`, data)
+    match_table.user_two=$1
+    ;`, data)
   },
   getMessages(data){
     // console.log(`I am in the model for get messages ----> `, data);
