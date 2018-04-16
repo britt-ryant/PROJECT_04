@@ -18,7 +18,13 @@ export default class EditProfile extends React.Component  {
       image: ""
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.deleteProfile = this.deleteProfile.bind(this)
   }
+  static navigationOptions = ({navigation}) => ({
+      headerRight: null,
+      title: "Edit Profile",
+      headerLeft: null
+    })
 
   componentDidMount(){
     console.log(`SOMETHING IS WORNG HERE `, this.state.currentUserId);
@@ -48,6 +54,19 @@ export default class EditProfile extends React.Component  {
     })
     .catch(err => {
       console.log("This is the error in the update function", err);
+    })
+  }
+  deleteProfile(){
+    const {navigate} = this.props.navigation
+    services.nuke(this.state.currentUserId)
+    .then(result => {
+      console.log('the profile was deleted');
+      this.setState({
+        fireRedirect: true
+      }, () => navigate("SignupScreen"))
+    })
+    .catch(err => {
+      console.log("I had an uh oh trying to delete the profile", err);
     })
   }
 
@@ -82,6 +101,11 @@ export default class EditProfile extends React.Component  {
           onPress={this.handleSubmit}
           title="SUBMIT"
           color="#841584"
+        />
+        <Button
+          onPress={this.deleteProfile}
+          title="Delete Profile"
+          color='#FF0000'
         />
       </View>
     )

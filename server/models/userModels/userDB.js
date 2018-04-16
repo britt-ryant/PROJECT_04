@@ -58,7 +58,7 @@ module.exports = {
     return db.none(`DELETE FROM user_information WHERE user_id=$1`, id)
   },
   delete(id){
-    // console.log(id);
+    console.log(id);
     return db.none('DELETE FROM user_table WHERE id=$1', id)
   }
 }

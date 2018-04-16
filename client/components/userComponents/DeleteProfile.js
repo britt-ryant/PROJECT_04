@@ -7,7 +7,7 @@ export default class DeleteProfile extends React.Component  {
   constructor(props){
     super(props);
     this.state = {
-      userId: 2,
+      userId: this.props.currentUserId,
       fireRedirect: false
     }
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -15,12 +15,13 @@ export default class DeleteProfile extends React.Component  {
 
   handleSubmit(e){
     console.log('I am deleteing the component');
+    const {navigate} = this.props.navigation
     services.nuke(this.state.userId)
     .then(result => {
       console.log('the profile was deleted');
       this.setState({
         fireRedirect: true
-      })
+      }, () => navigate("SignupScreen"))
     })
     .catch(err => {
       console.log("I had an uh oh trying to delete the profile", err);
@@ -30,6 +31,7 @@ export default class DeleteProfile extends React.Component  {
   render(){
     return(
         <View style={styles.tiny}>
+          <Text>Are you sure that you would like to delete your profile</Text>
             <Button
               onPress={this.handleSubmit}
               title="DELETE"

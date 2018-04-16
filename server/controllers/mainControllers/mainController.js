@@ -18,7 +18,7 @@ module.exports = {
     })
   },
   browseAll(req, res, next){
-    mainDB.getAll(req.body)
+    mainDB.likeQuery(req.body)
     .then(results => {
       // console.log("I got the results!!!", results);
       res.json({

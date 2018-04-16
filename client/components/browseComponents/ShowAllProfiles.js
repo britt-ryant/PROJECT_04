@@ -71,7 +71,6 @@ export default class ShowAllProfiles extends React.Component  {
   querySearch(){
     services.getAllProfiles(this.state)
     .then(result => {
-      console.log(`Check me out`, result);
       this.setState({
         searchResults: result.data.data
       }, () => this.processSearchResults())

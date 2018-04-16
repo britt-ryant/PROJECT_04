@@ -15,6 +15,12 @@ export default class SignUp extends React.Component  {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  static navigationOptions = ({navigation}) => ({
+      headerRight: null,
+      title: "Connection",
+      headerLeft: null
+    })
+
   handleSubmit(e){
     const {navigate} = this.props.navigation
     services.logIn(this.state)

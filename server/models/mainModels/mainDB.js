@@ -16,6 +16,21 @@ module.exports = {
       WHERE
       gender=$[gender]`, data)
   },
+  likeQuery(data){
+    return db.many(`SELECT * FROM user_information
+      JOIN
+      user_table
+      ON
+      user_table.id = user_information.id
+      WHERE
+      user_information.gender=$[gender]
+      AND
+      NOT EXISTS (
+        SELECT * FROM like_table
+        WHERE
+        user_table.id = like_table.like_received
+      )`, data)
+  },
   like(data){
     return db.one(`INSERT INTO like_table (like_sent, like_received) VALUES (
       $[like_sent],

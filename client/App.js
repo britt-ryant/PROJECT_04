@@ -77,6 +77,7 @@ import {StackNavigator} from 'react-navigation'
     MatchesScreen: {screen: mapNavigationStateParamsToProps(AllMatches)},
     MatchScreen: {screen: mapNavigationStateParamsToProps(Match)},
     OneMatchScreen: {screen: mapNavigationStateParamsToProps(OneMatch)},
+    DeleteScreen: {screen: mapNavigationStateParamsToProps(DeleteProfile)}
   })
 
 
