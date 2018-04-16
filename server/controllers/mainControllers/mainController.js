@@ -28,6 +28,9 @@ module.exports = {
     })
     .catch(err => {
       console.log('I am the error in the get all function in the mainController', err);
+      res.json({
+        message: "There are no people left that you havent seen, please check back later!"
+      })
     })
   },
   submitLike(req, res, next){

@@ -21,6 +21,10 @@ export default class SignUp extends React.Component  {
       headerLeft: null
     })
 
+  componentDidMount(){
+    console.log(`I am the props for the login Component`, this.props);
+  }
+
   handleSubmit(e){
     const {navigate} = this.props.navigation
     services.logIn(this.state)

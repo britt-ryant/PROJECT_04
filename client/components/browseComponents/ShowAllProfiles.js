@@ -13,7 +13,8 @@ export default class ShowAllProfiles extends React.Component  {
       apiDataLoaded: false,
       currentProfile: null,
       currentUser: this.props.currentUserId,
-      seeking: this.props.seeking
+      seeking: this.props.seeking,
+      message: ""
     }
     this.handleNavigation = this.handleNavigation.bind(this)
     this.handleEditPress = this.handleEditPress.bind(this)
@@ -52,6 +53,7 @@ export default class ShowAllProfiles extends React.Component  {
     this.querySearch()
     }
   processSearchResults(){
+    console.log(`I am here in the process searchResults`, this.state.searchResults);
     let searchResults = this.state.searchResults
     let randomIndex = Math.floor(Math.random()*(searchResults.length))
     this.setState({
@@ -72,9 +74,16 @@ export default class ShowAllProfiles extends React.Component  {
   querySearch(){
     services.getAllProfiles(this.state)
     .then(result => {
-      this.setState({
-        searchResults: result.data.data
-      }, () => this.processSearchResults())
+      console.log(`I am the response`, result);
+      if(result.data.data){
+        this.setState({
+          searchResults: result.data.data
+        }, () => this.processSearchResults())
+      } else {
+        this.setState({
+          message: result.data.message,
+        }, ()=> console.log(`The state was set!`, this.state.message))
+      }
     })
     .catch(err => {
       console.log('I am returning an error!', err);
@@ -139,16 +148,17 @@ export default class ShowAllProfiles extends React.Component  {
         <UnlikeButton
           handleLike={() => this.handleLike()}
         />
-        <Button
-          onPress={this.handleNavigation}
-          title="View your matches"
-        />
       </View>
     )
   }
   render(){
     return(
         <View style={styles.tiny}>
+          <Button
+            onPress={this.handleNavigation}
+            title="View your matches"
+          />
+          {this.state.message ? <Text style={{textAlign: "center"}}>{this.state.message}</Text> : ""}
           {this.state.apiDataLoaded ? this.renderData() : "loading"}
         </View>
     )
