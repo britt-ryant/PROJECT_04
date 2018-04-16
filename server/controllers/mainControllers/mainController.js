@@ -104,7 +104,7 @@ module.exports = {
       })
     })
     .catch(err => {
-      console.log(`I am the error for getAllMatches in the controller`, err);
+      console.log(`I am the error for getAllMatches in the controller`, err)
     })
   },
   getAllMessages(req, res, next){

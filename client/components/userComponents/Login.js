@@ -83,5 +83,8 @@ const styles = StyleSheet.create({
   },
   tiny: {
     maxHeight: "50%"
+  },
+  bigwords: {
+    fontSize: 25
   }
 });

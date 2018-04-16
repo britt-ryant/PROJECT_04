@@ -29,7 +29,8 @@ export default class ShowAllProfiles extends React.Component  {
       headerRight:
         <Button onPress={() => navigation.state.params.handlePress()} title='Edit' />,
       title: "Connection",
-      headerLeft: <Button onPress={() => navigation.state.params.handleSecondPress()} title='Logout' />
+      headerLeft: <Button onPress={() => navigation.state.params.handleSecondPress()} title='Logout' />,
+      gesturesEnabled: false
     })
 
   handleLogout(){
@@ -120,12 +121,12 @@ export default class ShowAllProfiles extends React.Component  {
     // console.log(`I am the image----> `, this.state.currentProfile.image);
     return (
       <View style={styles.tiny}>
-        <Text>My name is {this.state.currentProfile.username}</Text>
         <Image
           source={{uri:this.state.currentProfile.image}}
-          style={{width: 300, height: 300}}
+          style={styles.newcontainer}
           resizeMode='cover'
         />
+        <Text style={styles.bigwords}>My name is {this.state.currentProfile.username}</Text>
         {/* <Text>I am a {this.state.currentProfile.gender}</Text>
         <Text>Looking for a {this.state.currentProfile.seeking}</Text> */}
         <Text>About me: {this.state.currentProfile.description}</Text>
@@ -161,7 +162,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  newcontainer: {
+    height: 400,
+    width: 400,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   tiny: {
     maxHeight: "50%"
+  },
+  bigwords: {
+    fontSize: 25
   }
 });

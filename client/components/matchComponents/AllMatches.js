@@ -61,10 +61,6 @@ export default class AllMatches extends React.Component {
     return(
       <View>
         {allMatches}
-        <Button
-          title="Browse"
-          onPress={this.navigate}
-        />
       </View>
     )
   }
@@ -72,6 +68,10 @@ export default class AllMatches extends React.Component {
     return(
       <View>
         {this.state.apiDataLoaded ? this.renderData() : "Loading matches"}
+        <Button
+          title="Browse"
+          onPress={this.navigate}
+        />
       </View>
     )
   }

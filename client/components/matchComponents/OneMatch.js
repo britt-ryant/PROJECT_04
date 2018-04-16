@@ -106,12 +106,12 @@ export default class OneMatch extends React.Component {
   renderInfo(){
     return(
       <View>
-        <Text>{this.state.description}</Text>
         <Image
           source={{uri: this.state.image}}
-          style={{width: 300, height: 300}}
+          style={{width: 400, height: 400}}
           resizeMode='cover'
         />
+        <Text style={{fontSize: 25}}>{this.state.description}</Text>
         <Button
           title="Back to Matches"
           onPress={this.handleNavigation}
@@ -123,12 +123,11 @@ export default class OneMatch extends React.Component {
   render(){
     return(
       <View>
+        {this.state.apiDataRecieved ? this.whatToRender() : ''}
         <Button
           title={this.state.renderMessages ? `See ${this.state.targetUsername}'s info` : `Message ${this.state.targetUsername}`}
           onPress={() => this.setState({renderMessages: !this.state.renderMessages})}
         />
-        <Text>{this.state.targetUsername}</Text>
-        {this.state.apiDataRecieved ? this.whatToRender() : ''}
       </View>
     )
   }
